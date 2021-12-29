@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 class PersonService {
 
 	private final PersonRepo personRepo;
@@ -16,8 +15,9 @@ class PersonService {
 		this.personRepo = personRepo;
 	}
 
-	Person save(final Person person) {
-		return personRepo.save(person);
+	@Transactional
+	public Person save(final Person person) {
+		return personRepo.saveAndFlush(person);
 	}
 
 	Optional<Person> findById(final long id) {

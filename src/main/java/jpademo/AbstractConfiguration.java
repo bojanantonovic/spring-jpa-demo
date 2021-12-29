@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -30,7 +27,7 @@ public abstract class AbstractConfiguration {
 
 	@Bean
 	public Properties hibernateProperties() {
-		Properties hibernateProp = new Properties();
+		final var hibernateProp = new Properties();
 		hibernateProp.put("hibernate.dialect", dialect);
 		hibernateProp.put("hibernate.hbm2ddl.auto", hbm2ddl);
 
@@ -42,10 +39,10 @@ public abstract class AbstractConfiguration {
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource dataSource, final Properties hibernateProperties) {
-		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+		final var factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setPackagesToScan("jpademo");
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		final var vendorAdapter = new HibernateJpaVendorAdapter();
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
 		factoryBean.setJpaProperties(hibernateProperties);
 		return factoryBean;
@@ -71,8 +68,10 @@ public abstract class AbstractConfiguration {
 		return dataSource;
 	}
 
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager txManager(final DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
+	@Bean
+	public JpaTransactionManager transactionManager(final DataSource dataSource) {
+		final var transactionManager = new JpaTransactionManager();
+		transactionManager.setDataSource(dataSource);
+		return transactionManager;
 	}
 }

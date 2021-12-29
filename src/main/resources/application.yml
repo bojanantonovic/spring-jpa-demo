@@ -8,6 +8,10 @@ spring:
     username: sa
     password: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
     driver-class-name: org.h2.Driver
+#     url: jdbc:sqlserver://localhost
+#    username: SA
+#    password: MyPass@word
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     generate-ddl: true
     hibernate:
