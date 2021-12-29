@@ -1,16 +1,12 @@
 package jpademo;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Disabled // Github doesn't have a SQL Server instance
-@SpringJUnitConfig(SqlServerConfiguration.class)
-class TestWithSqlServer {
+public abstract class AbstractTest {
 
 	@Autowired
 	private PersonService personService;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-class PersonService {
+public class PersonService {
 
 	private final PersonRepo personRepo;
 
@@ -20,11 +20,11 @@ class PersonService {
 		return personRepo.saveAndFlush(person);
 	}
 
-	Optional<Person> findById(final long id) {
+	public Optional<Person> findById(final long id) {
 		return personRepo.findById(id);
 	}
 
-	List<Person> findAll() {
+	public List<Person> findAll() {
 		return personRepo.findAll();
 	}
 }
