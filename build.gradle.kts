@@ -17,7 +17,7 @@ dependencies {
     testImplementation("org.springframework:spring-test:5.3.14")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("com.h2database:h2:2.0.202")
+    testRuntimeOnly("com.h2database:h2:2.0.206")
     testRuntimeOnly("com.microsoft.sqlserver:mssql-jdbc:9.4.1.jre16")
 
     //testImplementation("org.springframework.boot:spring-boot-test-autoconfigure:2.6.2")
